@@ -54,10 +54,26 @@ exports.loginUserToken = async (req, res) => {
       return res.status(401).json({ message: 'Authentication failed' });
     }
 
-    const token = jwt.sign({id: user.uid, phone: user.phone}, "SECRETKEY", {expiresIn: "1h"})    
+    const token = jwt.sign({id: user.uid, phone: user.phone, role: user.role}, "SECRETKEY", {expiresIn: "1h"})    
 
     res.json({ message: 'Login successful', token: token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
+
+
+exports.getAllUsers = async(req,res) => {
+
+
+  try {
+    const user = await User.findAll()
+
+    res.json({user});
+
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+  
+
+}

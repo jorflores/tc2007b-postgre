@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 
-exports.verifyToken = (req,res,next) =>{
+exports.verifyToken = (role) => (req,res,next) =>{
 
     const token = req.headers["auth"] || null
 
@@ -14,7 +14,14 @@ exports.verifyToken = (req,res,next) =>{
           return res.status(401).json({ message: "Invalid token" });
         }
         req.user = decoded;
+        console.log(decoded.role)
+        console.log(role)
+        if (decoded.role != role){
+            return res.status(401).json({ message: "Unauthorized" });
+        }
+        else {
         next();
+        }
       });
 
 }
