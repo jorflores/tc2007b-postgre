@@ -2,7 +2,14 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const bcrypt = require('bcrypt');
 
-const User = sequelize.define('User', {
+const User = sequelize.define('Users', {
+
+  uid: {
+    type: DataTypes.INTEGER,
+    primaryKey: true, 
+    autoIncrement: true
+  },
+
   phone: {
     type: DataTypes.STRING,
     allowNull: false,

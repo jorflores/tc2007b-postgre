@@ -1,13 +1,13 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const ExerciseHabit = sequelize.define('ExerciseHabit', {
-  userId: {
+const ExerciseHabit = sequelize.define('ExerciseHabits', {
+  uid: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: 'Users',
-      key: 'id'
+      key: 'uid'
     }
   },
   date: {
