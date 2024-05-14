@@ -18,8 +18,8 @@ exports.verifyToken = (role) => (req,res,next) =>{
         console.log(role)
      
         
-        
-        if (role == "admin"){
+        // Si es administrador tiene acceso a cualquier ruta. 
+        if (decoded.role == "admin"){
             next()
         }
         
