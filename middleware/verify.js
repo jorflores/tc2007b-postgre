@@ -16,7 +16,14 @@ exports.verifyToken = (role) => (req,res,next) =>{
         req.user = decoded;
         console.log(decoded.role)
         console.log(role)
-        if (decoded.role != role){
+     
+        
+        
+        if (role == "admin"){
+            next()
+        }
+        
+       else  if (decoded.role != role){
             return res.status(401).json({ message: "Unauthorized" });
         }
         else {
