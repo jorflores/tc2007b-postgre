@@ -11,7 +11,19 @@ exports.createUser = async (req, res) => {
 
 
     const { phone, password } = req.body;
+
+    const yaExiste = await User.findOne({ where: { phone } });
+
+    if (yaExiste) {
+
+      return res.status(409).json({ message: 'El telefono ya está registrado' });
+
+    }
+
+
     const newUser = await User.create({ phone, password });
+
+    
 
     const token = jwt.sign({id: newUser.uid, phone: newUser.phone, role: newUser.role}, "SECRETKEY", {expiresIn: "1h"}) 
 
